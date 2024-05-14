@@ -6,6 +6,7 @@ public class Main {
     public static void main(String[] args) {
         /*Crea instancias de cuenta de ahorros y cuenta corriente.
         Llama a los métodos correspondientes para cada una.*/
+        System.out.println("Bienvenido");
         Cuenta_Ahorros CA = new Cuenta_Ahorros(100,12);
         CA.cosignaciones(20);
         CA.retirar(5);
