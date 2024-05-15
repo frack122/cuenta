@@ -23,16 +23,18 @@ public class Cuenta_Ahorros extends Cuenta {
     //Retirar: solo si la cuenta está activa.
     @Override
     public void retirar() {
+        if(cantidades>saldo) {
+            System.out.println("El retiro no puede ser mayor al saldo");
 
-        if(estado)
-        {
-            super.retirar();
-            nuevosaldo2=(saldo-cantidades);
-            trasaciones++;
-            System.out.println("Saldo Atual: "+nuevosaldo2);
-        }
-        else{
-            System.out.println("No puede retirar ya que no tiene activado la cuenta");
+        }else {
+            if(estado){
+                super.retirar();
+                nuevosaldo2=(saldo-cantidades);
+                trasaciones++;
+                System.out.println("Saldo Actual: "+nuevosaldo2);
+            }else {
+                estado = false;
+            }
         }
 
     }

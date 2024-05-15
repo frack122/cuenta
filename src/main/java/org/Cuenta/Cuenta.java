@@ -37,11 +37,16 @@ public class Cuenta {
     }
     //Retirar: resta una cantidad del saldo.
     public void retirar(){
-        if(saldo>0){
-            nuevosaldo2=(saldo-cantidades);
-            trasaciones++;
+
+           if(cantidades>saldo){
+               System.out.println("El retiro no puede ser mayor al saldo");
         }else {
-            System.out.println("No puede retirar el saldo");
+               if(saldo>0){
+                   nuevosaldo2=(saldo-cantidades);
+                   trasaciones++;
+               }else {
+                   System.out.println("saldo insuficiente");
+               }
         }
     }
     //Calcular interés mensual: actualiza el saldo.

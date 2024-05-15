@@ -19,31 +19,36 @@ public class Cuenta_Corriente extends Cuenta {
    //Retirar: permite retirar más del saldo, generando sobregiro.
    public void retirar() {
 
-      if (sg1 <= saldo+saldo*0.10) {
-         if (cantidades > saldo) {
-            sobregiro+=cantidades-saldo*0.10;
-            System.out.println("su cuenta se ha sobregirado con un 10% : "+sobregiro);
-            saldo=0;
-         }else {
-            saldo -= cantidades;
-         }
-      }
-      else
-      {
-         trasaciones ++;
-      }
+     if (cantidades>saldo){
+        System.out.println("El retiro no puede ser mayor al saldo");
+     }else {
+        if (sg1 <= saldo+saldo*0.10) {
+           if (cantidades > saldo) {
+              sobregiro+=cantidades-saldo*0.10;
+              System.out.println("su cuenta se ha sobregirado con un 10% : "+sobregiro);
+              saldo=0;
+           }else {
+              saldo -= cantidades;
+           }
+        }
+        else
+        {
+           trasaciones ++;
+        }
+     }
    }
    //Consignar: reduce el sobregiro si lo hay.
    public void cosignaciones() {
       super.cosignaciones();
-      if (sobregiro>0) {
-         if(cantidades <= sobregiro) {
-            sobregiro+=cantidades-saldo;
+      if (sg1 <= saldo+saldo*0.10) {
+         if(cantidades <= sg1) {
+            sobregiro+=cantidades+saldo;
             trasaciones++;
-            System.out.println("su cuenta se ha sobregirado");
+            System.out.println("su cuenta se ha sobregirado"+sobregiro);
          }else{
             saldo+=(cantidades-saldo);
             sobregiro=0;
+            System.out.println("su cuenta no se ha sobregirado");
          }
       }
    }
