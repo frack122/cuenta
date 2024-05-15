@@ -2,17 +2,17 @@ package org.Cuenta;
 /*Clase Cuenta de Ahorros (hereda de Cuenta):
 Atributo: cuenta_activa (booleano, depende del saldo).
 Métodos:
-Consignar: solo si la cuenta está activa.
-Retirar: solo si la cuenta está activa.
-Extracto mensual: considera comisión adicional si hay más de 4 retiros.
+//Consignar: solo si la cuenta está activa.
+//Retirar: solo si la cuenta está activa.
+//Extracto mensual: considera comisión adicional si hay más de 4 retiros.
 Nuevo método imprimir: saldo, comisión mensual, número de transacciones.
 * */
 public class Cuenta_Ahorros extends Cuenta {
     private boolean estado;
 
-    public Cuenta_Ahorros(float saldo , float tasaanual)
+    public Cuenta_Ahorros(float saldo,float cantidades)
     {
-        super(saldo, tasaanual);
+        super(saldo,cantidades);
         estado = true;
         if(saldo<=10){
             estado = false;
@@ -20,45 +20,39 @@ public class Cuenta_Ahorros extends Cuenta {
             estado = true;
         }
     }
-
+    //Retirar: solo si la cuenta está activa.
     @Override
-    public void retirar(float cantidades) {
-        float nuevosaldo = (saldo-cantidades);
+    public void retirar() {
+
         if(estado)
         {
-          saldo-=cantidades;
-            super.retirar(cantidades);
+            super.retirar();
+            nuevosaldo2=(saldo-cantidades);
             trasaciones++;
+            System.out.println("Saldo Atual: "+nuevosaldo2);
         }
         else{
             System.out.println("No puede retirar ya que no tiene activado la cuenta");
         }
 
     }
+    //Consignar: solo si la cuenta está activa.
     @Override
-    public void cosignaciones(float cantidades){
+    public void cosignaciones(){
         if (estado) {
-            super.cosignaciones(cantidades);
+            super.cosignaciones();
             saldo+=cantidades;
             trasaciones++;
+            System.out.println("Su saldo nuevo es"+nuevosaldo);
         }else {
             System.out.println("No puede cosginar ya que no tiene activado la cuenta");
         }
     }
-
-    public void extractomensual(float cantidades){
-
-
+    //Extracto mensual: considera comisión adicional si hay más de 4 retiros.
+    public void extractomensual(){
                 comisionmensual+=(trasaciones-4);
-                 super.extractomensual(cantidades);
+                 super.extractomensual();
                  trasaciones++;
-
+        System.out.println("Su saldo nuevo es : "+saldo);
     }
-
-    public void imprimir(){
-        System.out.println("Saldo: "+saldo);
-        System.out.println("comisicion mensual: "+comisionmensual);
-        System.out.println("numero de transaciones"+(trasaciones));
-    }
-
 }

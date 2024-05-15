@@ -5,62 +5,54 @@ package org.Cuenta;
 * Fecha : 13-05-2024
 * Constructor que inicializa los atributos (tasa anual, saldo).
 *Métodos:
-Consignar: añade una cantidad al saldo.
-Retirar: resta una cantidad del saldo.
-Calcular interés mensual: actualiza el saldo.
-Extracto mensual: actualiza saldo, restando comisión mensual y calculando interés.
-Imprimir: muestra los valores de los atributos.
+//Consignar: añade una cantidad al saldo.
+//Retirar: resta una cantidad del saldo.
+//Calcular interés mensual: actualiza el saldo.
+//Extracto mensual: actualiza saldo, restando comisión mensual y calculando interés.
+//Imprimir: muestra los valores de los atributos.
 *  */
 public class Cuenta {
 
     protected float saldo;
     protected int numerodecosignaciones=0;
     protected int numeroderetiros=0;
-    protected float tasaanual;
+    protected float tasaanual=0.12f;
     protected float comisionmensual=0;
     protected int trasaciones;
-
-    float tasamensual ;
-    float nuevosaldo;
-    float novosaldo ;
-    float nuevosaldo3 ;
-    float nuevosaldo2;
-    public Cuenta(float saldo, float tasaanual)
+    protected float cantidades;
+    protected float nuevosaldo;
+    protected float nuevosaldo2;
+   protected float nuevosaldo3;
+   protected float nuevosaldo4;
+    public Cuenta(float saldo,float cantidades)
     {
         this.saldo=saldo;
-        this.tasaanual=tasaanual;
+        this.cantidades=cantidades;
     }
-    public Cuenta(){
-
-    }
-    public void cosignaciones(float cantidades){
-         nuevosaldo  = (saldo+cantidades);
+    //Consignar: añade una cantidad al saldo.
+    public void cosignaciones(){
+        nuevosaldo  = (saldo+cantidades);
+        saldo+=cantidades;
         trasaciones++;
     }
-    public void retirar(float cantidades){
-         nuevosaldo3 = (saldo-cantidades);
-        if(nuevosaldo>0){
-            saldo-=cantidades;
+    //Retirar: resta una cantidad del saldo.
+    public void retirar(){
+        if(saldo>0){
+            nuevosaldo2=(saldo-cantidades);
             trasaciones++;
         }else {
             System.out.println("No puede retirar el saldo");
         }
     }
+    //Calcular interés mensual: actualiza el saldo.
     public void interesmensual(){
-         tasamensual = saldo /12;
-        comisionmensual = tasamensual * saldo;
-         novosaldo = (saldo+comisionmensual);
+         float tasamensual = saldo /12;
+        comisionmensual = tasamensual * saldo /100;
     }
-    public void extractomensual(float cantidades){
-        nuevosaldo2 = (saldo-comisionmensual);
+    //Extracto mensual: actualiza saldo, restando comisión mensual y calculando interés.
+    public void extractomensual(){
         interesmensual();
+        System.out.println("Extractomensual : "+comisionmensual);
         trasaciones++;
-    }
-
-    public void imprimir(){
-        System.out.println("Saldo: "+saldo);
-        System.out.println("Tasaanual: "+tasaanual);
-        System.out.println("Comisionmensual: "+novosaldo);
-        System.out.println("Trasaciones: "+trasaciones);
     }
 }
